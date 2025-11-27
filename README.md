@@ -18,7 +18,7 @@ The diffusion model learns to generate field configurations that sample from the
 
 For an analytical treatment of the 0+1D model, as well as a discussion of autocorrelation times, see [A Metropolitan Adventure](A_Metropolitan_Adventure.pdf).
 
-### Validation and Analysis
+## Validation and Analysis
 
 The model's performance can be evaluated by comparing the action distributions of generated samples with the original training data. The following shows the result after a moderate amount of training:
 

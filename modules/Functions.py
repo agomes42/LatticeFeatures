@@ -1,31 +1,42 @@
+"""
+Lattice Field Theory Functions Module
+
+This module provides core functions for 1D scalar field theory on a lattice, including
+action calculations, Monte Carlo sampling algorithms, and analysis tools.
+
+Functions:
+    action: Calculate the action of a scalar field on the lattice with periodic boundary conditions.
+    get_VEV: Calculate the vacuum expectation value (VEV) of the scalar field.
+    get_mu: Calculate the mass of the scalar field around its VEV.
+    get_m2_and_g: Calculate the mass term squared (m2) and coupling constant (g) from given parameters.
+    metropolis_algorithm: Metropolis algorithm to generate 1D arrays of given size based on a 
+        probability distribution function p.
+    metropolis_algorithm2: Optimized Metropolis algorithm for multiple chains to generate 1D arrays.
+    print_and_plot: Print parameters and plot the generated array with lines at plus and minus VEV.
+    point_autocorrelation: Calculate the autocorrelation function of a 1D tensor.
+    action_autocorrelation: Calculate the autocorrelation function of the action of a 1D tensor.
+    plot_autocorrelation: Plot the point and action autocorrelation functions.
+    plot: Plot a graph with optional error bars and log scales.
+
+Constants:
+    sig_figs: Number of significant figures for display formatting.
+
+Example:
+    >>> import torch
+    >>> from modules.Functions import action, metropolis_algorithm2
+    >>> 
+    >>> # Generate field configurations using Monte Carlo
+    >>> samples = metropolis_algorithm2(size=32, mc_iterations=1000, m2=-0.2, g=0.2)
+    >>> 
+    >>> # Calculate action for a configuration
+    >>> field_config = samples[0][0]  # First sample from first chain
+    >>> S = action(field_config, m2=-0.2, g=0.2)
+    >>> print(f"Action: {S}")
+"""
+
 import torch
 import matplotlib.pyplot as plt
 import math
-
-# Summary of functions:
-
-# action: Calculate the action of a scalar field on the lattice with periodic boundary conditions.
-
-# get_VEV: Calculate the vacuum expectation value (VEV) of the scalar field.
-
-# get_mu: Calculate the mass of the scalar field around its VEV.
-
-# get_m2_and_g: Calculate the mass term squared (m2) and coupling constant (g) from given parameters.
-
-# metropolis_algorithm: Metropolis algorithm to generate 1D arrays of given size based on a probability 
-# distribution function p.
-
-# metropolis_algorithm2: Optimized Metropolis algorithm for multiple chains to generate 1D arrays.
-
-# print_and_plot: Print parameters and plot the generated array with lines at plus and minus VEV.
-
-# point_autocorrelation: Calculate the autocorrelation function of a 1D tensor.
-
-# action_autocorrelation: Calculate the autocorrelation function of the action of a 1D tensor.
-
-# plot_autocorrelation: Plot the point and action autocorrelation functions.
-
-# plot: Plot a graph with optional error bars and log scales.
 
 sig_figs = 3
 
